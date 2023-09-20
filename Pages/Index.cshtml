@@ -1,0 +1,65 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Year" class="control-label">Year:</label><br />
+            <input type=number asp-for="Year" id="Year" class="form-control" min="1900" max="@((DateTime.Now.Year) + 1)" />
+            @* <span asp-validation-for="Year"></span> *@
+            <span data-valmsg-for="Year"></span>
+
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Get Zodiac</button>
+        <button type="reset" class="btn btn-success" onclick="clearForm()">Clear</button>
+        
+    </form>
+</div>
+
+<div class="centered-box">
+    @if (!string.IsNullOrEmpty(Model.Zodiac) && Model.IsValidYear)
+    {
+        <p>Your Zodiac is: <strong>@Model.Zodiac</strong></p>
+
+        <img src="~/images/@(Model.Zodiac.ToLower()).png" alt="@Model.Zodiac" />
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Year must be between 1900 and @(DateTime.Now.Year + 1). Please try again.
+        </div>   
+    }
+</div>
+
+@section Scripts {
+    <script>
+       function clearForm() {
+
+        // Clear the input field (Year)
+        document.getElementById("Year").value = "";
+
+        // Clear the validation message for Year
+        document.querySelector("span[data-valmsg-for='Year']").textContent = "";
+        document.querySelector("p").textContent = "";
+
+        // Hide the alert message
+        var alertDiv = document.querySelector(".alert");
+        alert.innerHTML = "";
+        if (alertDiv) {
+            alertDiv.style.display = "none";
+        }
+
+        // Clear the content inside centered-box
+        var centeredBox = document.querySelector(".centered-box");
+        centeredBox.innerHTML = "";
+        
+        // Hide the centered-box
+        centeredBox.style.display = "none";
+}
+
+    </script>
+}
