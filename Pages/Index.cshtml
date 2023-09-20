@@ -8,10 +8,8 @@
     <form method="post">
         <div class="form-group">
             <label asp-for="Year" class="control-label">Year:</label><br />
-            <input type=number asp-for="Year" id="Year" class="form-control" min="1900" max="@((DateTime.Now.Year) + 1)" />
-            @* <span asp-validation-for="Year"></span> *@
-            <span data-valmsg-for="Year"></span>
-
+            <input type=number asp-for="Year" id="Year" class="form-control"/>
+            <span asp-validation-for="Year"></span>
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Get Zodiac</button>
@@ -38,27 +36,28 @@
 @section Scripts {
     <script>
        function clearForm() {
+            // Clear the input field (Year)
+            var yearInput = document.getElementById("Year");
+            if (yearInput) {
+                yearInput.value = "";
+            }
 
-        // Clear the input field (Year)
-        document.getElementById("Year").value = "";
+            // Clear the validation message for Year
+            document.querySelector("span[data-valmsg-for='Year']").textContent = "";
 
-        // Clear the validation message for Year
-        document.querySelector("span[data-valmsg-for='Year']").textContent = "";
-        document.querySelector("p").textContent = "";
+            // Clear the content inside the alert message
+            var alertDiv = document.querySelector(".alert");
+            if (alertDiv) {
+                alertDiv.textContent = "";  // Clear the content inside the alert
+                alertDiv.style.display = "none";  // Hide the alert
+            }
 
-        // Hide the alert message
-        var alertDiv = document.querySelector(".alert");
-        alert.innerHTML = "";
-        if (alertDiv) {
-            alertDiv.style.display = "none";
-        }
-
-        // Clear the content inside centered-box
-        var centeredBox = document.querySelector(".centered-box");
-        centeredBox.innerHTML = "";
-        
-        // Hide the centered-box
-        centeredBox.style.display = "none";
+            // Clear the content inside centered-box
+            var centeredBox = document.querySelector(".centered-box");
+            centeredBox.innerHTML = "";
+            
+            // Hide the centered-box
+            centeredBox.style.display = "none";
 }
 
     </script>

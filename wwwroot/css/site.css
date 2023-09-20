@@ -34,3 +34,7 @@ body {
   color: rgb(17, 70, 49);
   /* display: none; */
 }
+
+.alert{
+  margin-bottom: 0rem;
+}

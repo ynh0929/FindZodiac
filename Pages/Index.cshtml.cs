@@ -17,7 +17,8 @@ public class IndexModel : PageModel
    {
         if(!IsValidYear)
         {
-            ModelState.AddModelError("Year", "Enter a valid year between 1900 and " + (DateTime.Now.Year + 1));
+            ModelState.Clear();
+            // ModelState.AddModelError("Year", "Year must be between 1900 and " + (DateTime.Now.Year + 1) + ". Please try again.");
         }
 
         Zodiac = Utils.GetZodiac(Year!.Value);
